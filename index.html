@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ultimate Protein Lab 💀🧬</title>
+<title>Ultimate Bioinformatics Lab 💀🧬</title>
 
 <link rel="stylesheet" href="style.css">
 <script src="https://unpkg.com/ngl@latest/dist/ngl.js"></script>
@@ -10,12 +10,13 @@
 
 <body>
 
-<header>🧬 ULTIMATE PROTEIN PLATFORM</header>
+<header>🧬 ULTIMATE BIOINFORMATICS PLATFORM</header>
 
 <div class="container">
 
+<!-- ================= PROTEIN ================= -->
 <div class="card">
-<h3>Protein Explorer</h3>
+<h3>🧬 Protein Explorer</h3>
 
 <input id="searchProtein" placeholder="Enter Protein Name or PDB ID">
 
@@ -39,11 +40,22 @@
 <div id="proteinInfo"></div>
 <div id="analysisPanel"></div>
 <div id="residueInfo"></div>
+</div>
 
+<!-- ================= ALIGNMENT ================= -->
+<div class="card">
+<h3>🧬 Sequence Alignment Tool</h3>
+
+<textarea id="seq1" placeholder="Enter Sequence 1"></textarea>
+<textarea id="seq2" placeholder="Enter Sequence 2"></textarea>
+
+<button onclick="alignSequences()">Align</button>
+
+<div id="alignmentResult"></div>
 </div>
 
 </div>
 
 <script src="script.js"></script>
 </body>
-</html>
+  </html>

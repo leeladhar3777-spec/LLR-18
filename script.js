@@ -3,7 +3,7 @@ let spin=false;
 let ligandRep=null;
 let activeRep=null;
 
-// Protein name → PDB
+// name → PDB
 const proteinMap = {
 "hemoglobin":"6HHB",
 "insulin":"1INS",
@@ -21,7 +21,7 @@ function init(){
 
 stage = new NGL.Stage("viewer");
 
-// click residue info
+// click residue
 stage.signals.clicked.add(function(p){
 
 if(p && p.atom){
@@ -38,7 +38,7 @@ Position: ${a.resno}
 });
 }
 
-// LOAD PROTEIN
+// LOAD
 function loadProtein(){
 
 document.getElementById("viewer").innerHTML="";
@@ -51,7 +51,6 @@ stage.loadFile("rcsb://" + pdb).then(comp=>{
 
 component = comp;
 
-// base structure
 component.addRepresentation(rep.value,{colorScheme:"chainname"});
 component.addRepresentation("cartoon",{colorScheme:"sstruc"});
 
@@ -154,15 +153,13 @@ let topAA = Object.entries(amino)
 analysisPanel.innerHTML=`
 <h3>Protein Analysis</h3>
 
-<b>Secondary Structure</b><br>
 Helix: ${h}%<br>
 Sheet: ${s}%<br>
 Coil: ${c}%<br>
 
-<br><b>Stats</b><br>
-Residues: ${residues}<br>
-Atoms: ${atoms}<br>
-Ligands: ${ligands}
+<br>Residues: ${residues}
+<br>Atoms: ${atoms}
+<br>Ligands: ${ligands}
 
 <br><br><b>Chains</b><br>
 ${chainInfo}
@@ -172,7 +169,7 @@ ${topAA}
 `;
 }
 
-// FETCH INFO
+// INFO
 async function fetchInfo(pdb){
 
 try{
@@ -187,4 +184,70 @@ ${data.struct.title}
 }catch{
 proteinInfo.innerText="No info available";
 }
+}
+
+// ================= ALIGNMENT =================
+function alignSequences(){
+
+let s1 = seq1.value.trim().toUpperCase();
+let s2 = seq2.value.trim().toUpperCase();
+
+if(!s1 || !s2){
+alert("Enter both sequences");
+return;
+}
+
+const match=2, mismatch=-1, gap=-2;
+
+let m=s1.length, n=s2.length;
+let dp=Array(m+1).fill().map(()=>Array(n+1).fill(0));
+
+for(let i=0;i<=m;i++) dp[i][0]=i*gap;
+for(let j=0;j<=n;j++) dp[0][j]=j*gap;
+
+for(let i=1;i<=m;i++){
+for(let j=1;j<=n;j++){
+let d = dp[i-1][j-1] + (s1[i-1]===s2[j-1]?match:mismatch);
+let u = dp[i-1][j] + gap;
+let l = dp[i][j-1] + gap;
+dp[i][j] = Math.max(d,u,l);
+}
+}
+
+// traceback
+let a1="", a2="";
+let i=m, j=n;
+
+while(i>0 && j>0){
+if(dp[i][j] === dp[i-1][j-1] + (s1[i-1]===s2[j-1]?match:mismatch)){
+a1 = s1[i-1] + a1;
+a2 = s2[j-1] + a2;
+i--; j--;
+}
+else if(dp[i][j] === dp[i-1][j] + gap){
+a1 = s1[i-1] + a1;
+a2 = "-" + a2;
+i--;
+}else{
+a1 = "-" + a1;
+a2 = s2[j-1] + a2;
+j--;
+}
+}
+
+while(i>0){ a1=s1[i-1]+a1; a2="-"+a2; i--; }
+while(j>0){ a1="-"+a1; a2=s2[j-1]+a2; j--; }
+
+let matchLine="";
+for(let k=0;k<a1.length;k++){
+matchLine += (a1[k]===a2[k]) ? "|" : " ";
+}
+
+alignmentResult.innerHTML = `
+Score: ${dp[m][n]}
+
+${a1}
+${matchLine}
+${a2}
+`;
 }

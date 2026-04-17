@@ -21,15 +21,19 @@ background:#1e293b;
 padding:15px;
 border-radius:12px;
 max-width:950px;
-margin:auto;
+margin:20px auto;
 }
 
-input,select,button{
+input,select,button,textarea{
 width:100%;
 margin:6px 0;
 padding:10px;
 border:none;
 border-radius:8px;
+}
+
+textarea{
+height:100px;
 }
 
 button{
@@ -41,4 +45,13 @@ cursor:pointer;
 height:550px;
 background:black;
 border-radius:10px;
+}
+
+#alignmentResult{
+background:#020617;
+padding:10px;
+border-radius:8px;
+margin-top:10px;
+font-family:monospace;
+white-space:pre-wrap;
 }

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ultimate Bioinformatics Lab 💀🧬</title>
+<title>Ultimate Bioinformatics Platform 💀🧬</title>
 
 <link rel="stylesheet" href="style.css">
 <script src="https://unpkg.com/ngl@latest/dist/ngl.js"></script>
@@ -27,7 +27,7 @@
 <option value="spacefill">Spacefill</option>
 </select>
 
-<button onclick="loadProtein()">Load</button>
+<button onclick="loadProtein()">Load Protein</button>
 <button onclick="toggleSpin()">Rotate</button>
 <button onclick="resetView()">Reset</button>
 
@@ -40,6 +40,8 @@
 <div id="proteinInfo"></div>
 <div id="analysisPanel"></div>
 <div id="residueInfo"></div>
+<div id="similarProteins"></div>
+
 </div>
 
 <!-- ================= ALIGNMENT ================= -->
@@ -49,7 +51,7 @@
 <textarea id="seq1" placeholder="Enter Sequence 1"></textarea>
 <textarea id="seq2" placeholder="Enter Sequence 2"></textarea>
 
-<button onclick="alignSequences()">Align</button>
+<button onclick="alignSequences()">Align Sequences</button>
 
 <div id="alignmentResult"></div>
 </div>
@@ -58,4 +60,4 @@
 
 <script src="script.js"></script>
 </body>
-  </html>
+</html>

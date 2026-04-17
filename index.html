@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ultimate Protein Lab 💀🧬</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/ngl@latest/dist/ngl.js"></script>
+</head>
+
+<body>
+
+<header>🧬 ULTIMATE PROTEIN PLATFORM</header>
+
+<div class="container">
+
+<div class="card">
+<h3>Protein Explorer</h3>
+
+<input id="searchProtein" placeholder="Enter Protein Name or PDB ID">
+
+<select id="rep">
+<option value="cartoon">Cartoon</option>
+<option value="surface">Surface</option>
+<option value="ball+stick">Ball+Stick</option>
+<option value="spacefill">Spacefill</option>
+</select>
+
+<button onclick="loadProtein()">Load</button>
+<button onclick="toggleSpin()">Rotate</button>
+<button onclick="resetView()">Reset</button>
+
+<button onclick="toggleLigand()">Ligands</button>
+<button onclick="toggleActiveSite()">Active Site</button>
+<button onclick="analyzeProtein()">Analyze</button>
+
+<div id="viewer"></div>
+
+<div id="proteinInfo"></div>
+<div id="analysisPanel"></div>
+<div id="residueInfo"></div>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

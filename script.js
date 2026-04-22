@@ -168,7 +168,7 @@ proteinInfo.innerText="No info available";
 // SIMILAR PROTEINS
 function fetchSimilarProteins(pdb){
 
-let list=["1CRN","1INS","1LYZ","1MBN","6LU7","6VSB"];
+let list=["1CRN","1LYZ","1MBN","6LU7","6VSB"];
 
 let html="<h3>🧬 Similar Proteins</h3>";
 
